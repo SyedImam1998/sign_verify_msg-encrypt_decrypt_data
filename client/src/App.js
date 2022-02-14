@@ -52,7 +52,7 @@ const signFun=async()=>{
   var msg=document.getElementById("msg").value;
   const web3= new Web3(window.ethereum);
   var hash= web3.utils.sha3(msg);
-  var signature= await web3.eth.accounts.sign(hash);
+  var signature= await web3.eth.personal.sign(hash, account)
   console.log("signature generated:",signature);
   setSign(signature);
 }
@@ -61,9 +61,9 @@ const seeSender=async()=>{
   const web3= new Web3(window.ethereum);
   var msg= document.getElementById("rMsg").value;
   var hash = web3.utils.sha3(msg)
-  var signR =document.getElementById("rSign").value;
-  // var sender=await web3.eth.personal.ecRecover(hash,signR);
-  var sender=await web3.eth.accounts.recover(signR);;
+  var signR =sign;
+  var sender=await web3.eth.personal.ecRecover(hash,signR);
+  // var sender=await web3.eth.accounts.recover(signR);;
   
   console.log("sender",sender);
 }

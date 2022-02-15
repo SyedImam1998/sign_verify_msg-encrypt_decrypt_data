@@ -105,7 +105,7 @@ var text = stringifiableToHex(encrypt({
   version: 'x25519-xsalsa20-poly1305',
 }))
 ciphertext=text;
-console.log(text);
+console.log("encrypted text:",text);
 
 }
 
@@ -116,10 +116,11 @@ const stringifiableToHex=(value)=>{
 }
 
 const decrypt=async()=>{/////////////
+  var text= document.getElementById("metatext").value;
   await window.ethereum
   .request({
     method: 'eth_decrypt',
-    params: [ciphertext,account],
+    params: [text,account],
   })
   .then((decryptedMessage) =>
     console.log('The decrypted message is:', decryptedMessage)
@@ -151,7 +152,7 @@ const decrypt=async()=>{/////////////
 
       <h2>Checking encryption and decryption with metamask</h2>
       <br></br>
-      <input type="text" id="metatext"></input>
+      <input type="text" placeholder='encrypted text' id="metatext"></input>
       <button onClick={encryptionFun}>Encrypt</button><button onClick={decrypt}>decrypt</button>
       
     </div>
